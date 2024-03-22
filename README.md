@@ -9,7 +9,7 @@ Multi-stage Docker builds offer a solution to these challenges by optimizing the
 Let’s explore how multi-stage Docker builds work with a practical example. In our Dockerfile, we define two stages: the build stage and the final stage.
 
 The Dockerfile :- Multi-Stage
-# ---1st stage: Build Stage---
+### ---1st stage: Build Stage---
 FROM ubuntu AS build-app
 
 WORKDIR /app
@@ -20,23 +20,23 @@ RUN apt-get update && \
     apt-get install -y python3 python3-pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# ---2nd stage: Final Stage---
+### ---2nd stage: Final Stage---
 
 FROM gcr.io/distroless/python3
 
 WORKDIR /app/
 
-# Copy the application code and built dependencies from the 1st stage
+#### Copy the application code and built dependencies from the 1st stage
 COPY --from=build-app /app/ .
 COPY --from=build-app /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 
-# Set the working directory to /app
+#### Set the working directory to /app
 ENV PYTHONPATH=/usr/local/lib/python3.11/site-packages
 
-# Expose port 5000 for the Flask application
+#### Expose port 5000 for the Flask application
 EXPOSE 5000
 
-# Define the default command to run the application
+#### Define the default command to run the application
 CMD ["app.py"]
 
 
