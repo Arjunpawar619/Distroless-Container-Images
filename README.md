@@ -1,4 +1,4 @@
-# docker-multistage-build
+# Multistage-Build (Dockerfile)
 
 ## Understanding the Problem
 Docker image size and security concerns have long plagued developers and operations teams. Traditional Docker images, built on rich base images like Ubuntu, often include unnecessary packages and dependencies, leading to bloated image sizes. Additionally, these images may contain security vulnerabilities due to their expansive attack surface.
